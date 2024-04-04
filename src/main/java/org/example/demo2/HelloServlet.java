@@ -14,297 +14,303 @@ public class HelloServlet extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String url = "jdbc:mysql://localhost:3306/notebooks";
+        String url = "jdbc:mysql://localhost:3306/sales";
         String user = "root";
         String pass = "";
         try {
+//            Class.forName("com.mysql.jdbc.Driver");
             Class.forName("com.mysql.jdbc.Driver");
             try(Connection connection = DriverManager.getConnection(url, user, pass)) {
-//                String comand = "create table Product(\n" +
+
+//                String command = "create table Sellers(\n" +
 //                        "    id int primary key auto_increment,\n" +
-//                        "    name varchar(255) not null,\n" +
-//                        "    Company_name varchar(255) null,\n" +
-//                        "    Number_of_pages decimal null, \n" +
-//                        "    Cover_type varchar(255) null,\n" +
-//                        "    Producing_country varchar(255) null,\n" +
-//                        "    Appearance varchar(255) null\n" +
+//                        "    name_seller varchar(255) not null,\n" +
+//                        "    contact_seller varchar(255) null,\n" +
+//                        "    email_seller varchar(255) null\n" +
 //                        ")";
 
-//            String command = "insert Product (name, Company_name, Number_of_pages, Cover_type, Producing_country, Appearance) " +
-//                    "values ('Ромашка' , 'Аврора', 20, 'soft', 'Китай', 'лінія'),\n" +
-//                    "('Троянда' , 'Аврора', 30, 'soft', 'Китай', 'клітинка'),\n"+
-//                    "('Конвалія' , 'Аврора', 20, 'soft', 'Україна', 'лінія'),\n" +
-//                "('Лілея' , 'Аврора', 40, 'soft', 'Україна', 'лінія'),\n"+
-//                        "('Хризантема' , 'Аврора', 40, 'soft', 'Україна', 'лінія'),\n" +
-//                "('Орхідея' , 'Аврора', 40, 'soft', 'Україна', 'порожньо'),\n"+
-//                    "('Мальва' , 'Аврора', 40, 'soft', 'Англія', 'лінія'),\n" +
-//                    "('Рута' , 'Аврора', 40, 'soft', 'США', 'порожньо')\n";
+//                String command1 = "create table Buyers(\n" +
+//                        "    id int primary key auto_increment,\n" +
+//                        "    name_buyer varchar(255) not null,\n" +
+//                        "    contact_buyer varchar(255) null,\n" +
+//                        "    email_buyer varchar(255) null\n" +
+//                        ")";
+//                String command2 = "create table Products(\n" +
+//                        "    id int primary key auto_increment,\n" +
+//                        "    name_product varchar(255) not null,\n" +
+//                        "    count_product int null,\n" +
+//                        "    price_product decimal null\n" +
+//                        ")";
+//                String command3 = "create table Sales(\n" +
+//                        "    id int primary key auto_increment,\n" +
+//                        "    seller_id int not null, INDEX (seller_id), FOREIGN KEY (seller_id)REFERENCES Sellers(id),\n" +
+//                        "    buyer_id int not null, INDEX (buyer_id), FOREIGN KEY (buyer_id)REFERENCES Buyers(id),\n" +
+//                        "    product_id int not null, INDEX (product_id), FOREIGN KEY (product_id)REFERENCES Products(id),\n" +
+//                        "    price_sale decimal not null,\n" +
+//                        "    date_sale date not null\n" +
+//                        ")";
+
+//
+//                Statement stat1 = connection.createStatement();
+//                stat1.executeUpdate(command1);
+//                Statement stat2 = connection.createStatement();
+//                stat2.executeUpdate(command2);
+//                Statement stat3 = connection.createStatement();
+//                stat3.executeUpdate(command3);
+
+
+//                            String command = "insert Sellers (name_seller, contact_seller, email_seller) " +
+//                    "values ('Іванов В. В.' , '123456', 'кен@jkkl'),\n" +
+//                    "('Іванов В. В.' , '1234566', 'кен@jkkl'),\n"+
+//                    "('Петров В. В.' , '7654389', 'jkl@jkkl'),\n" +
+//                    "('Шевченко В. В.' , '4566788', 'tyu@jkkl'),\n"+
+//                    "('Гончаренко В. В.' , '7677888', 'кyhj@jkkl'),\n" +
+//                    "('Коваленко В. В.' , '4566788', 'ghj@jkkl'),\n"+
+//                    "('Петренко В. В.' , '1235556', 'yui@jkkl'),\n" +
+//                    "('Іваненко В. В.' , '1323456', 'uio@jkkl')\n";
+//
+//                String command = "insert Buyers (name_buyer, contact_buyer, email_buyer) " +
+//                        "values ('Іванчук В. В.' , '123456', 'кен@jkkl'),\n" +
+//                        "('Іванович В. В.' , '1234566', 'кен@jkkl'),\n"+
+//                        "('Петрончук В. В.' , '7654389', 'jkl@jkkl'),\n" +
+//                        "('Шевчук В. В.' , '4566788', 'tyu@jkkl'),\n"+
+//                        "('Гончар В. В.' , '7677888', 'кyhj@jkkl'),\n" +
+//                        "('Ковальчук В. В.' , '4566788', 'ghj@jkkl'),\n"+
+//                        "('Петронюк В. В.' , '1235556', 'yui@jkkl'),\n" +
+//                        "('Іванчик В. В.' , '1323456', 'uio@jkkl')\n";
+
+//                String command = "insert Products (name_product, count_product, price_product) " +
+//                        "values ('Диван' , '123', '12.000'),\n" +
+//                        "('Шафа' , '65', '8.550'),\n"+
+//                        "('Крісло' , '100', '7.500'),\n" +
+//                        "('Стіл' , '450', '4.800'),\n"+
+//                        "('Стілець' , '700', '1.760'),\n" +
+//                        "('Кухня' , '70', '11.900'),\n"+
+//                        "('Стіл маленький' , '125', '4.900'),\n" +
+//                        "('Тумба' , '300', '5.300')\n";
+
+
+//                String command = "insert Sales (seller_id, buyer_id, product_id, price_sale ,date_sale) " +
+//                        "values (1, 1, 1, 12.900, '2024-03-21'),\n" +
+//                        "(1, 2, 2, 8.570, '2024-03-22'),\n"+
+//                        "(1, 3, 3, 8.100, '2024-03-24'),\n" +
+//                        "(2, 1, 4, 4.880, '2024-03-22'),\n"+
+//                        "(3, 1, 1, 12.900, '2024-03-20'),\n" +
+//                        "(3, 1, 8, 12.900, '2024-03-28'),\n"+
+//                        "(4, 1, 1, 12.900, '2024-03-30'),\n" +
+//                        "(5, 6, 7, 12.900, '2024-03-15'),\n" +
+//                        "(6, 5, 1, 4.600, '2024-03-21'),\n"+
+//                        "(7, 7, 5, 12.900, '2024-03-21'),\n" +
+//                        "(5, 1, 6, 10.900, '2024-03-15'),\n" +
+//                        "(6, 8, 6, 12.900, '2024-03-21'),\n"+
+//                        "(8, 4, 7, 5.900, '2024-03-21'),\n" +
+//                        "(8, 1, 1, 13.900, '2024-03-21')\n";
+//
 //                Statement stat = connection.createStatement();
 //                stat.executeUpdate(command);
+
 
                 response.setContentType("text/html");
                 PrintWriter out = response.getWriter();
 
-                String commandRead = "select * from Product";
+                String commandRead = "select * from Sellers";
                 Statement stat = connection.createStatement();
                 ResultSet result = stat.executeQuery(commandRead);
 
 
                 out.println("<html><body>");
-//                out.println("<h1>" + "Інформація про всі блокноти" + "</h1>");
-//
-//                out.println("<table>");
-//                out.println("<tr> <th> id </th> <th> name </th> <th>Company_name</th> <th>Number_of_pages</th> <th>Cover_type</th><th>Producing_country</th><th>Appearance</th></tr> ");
-//                while (result.next()) {
-//                    int id = result.getInt("id");
-//                    String name = result.getString("name");
-//                    String Company_name = result.getString("Company_name");
-//                    double Number_of_pages = result.getDouble("Number_of_pages");
-//                    String Cover_type = result.getString("Cover_type");
-//                    String Producing_country = result.getString("Producing_country");
-//                    String Appearance = result.getString("Appearance");
-//                    out.println("<tr> <td> " + id + "</td> <td> " + name + " </td> <td>" + Company_name + "</td> <td>" + Number_of_pages + "</td> <td>" + Cover_type + "</td><td>" + Producing_country + "</td><td>" + Appearance + "</td></tr> ");
-//                }
-//                out.println("</table>");
-//
-//                out.println("<h1>" + "Усі країни-виробники" + "</h1>");
-//
-//                out.println("<ul>");
-//                String command = "SELECT DISTINCT Producing_country FROM Product";
-//                stat = connection.createStatement();
-//                result = stat.executeQuery(command);
-//                while (result.next()) {
-//                    String producingCountry = result.getString("Producing_country");
-//                    out.println("<li>" + producingCountry + "</li>");
-//                }
-//                out.println("</ul>");
-//
-//                out.println("<h1>" + "Назви країн та кількість блокнотів із кожної країни" + "</h1>");
-//
-//                out.println("<table>");
-//                out.println("<tr><th>Країна</th><th>Кількість блокнотів</th></tr>");
-//
-//                command = "SELECT Producing_country, COUNT(*) AS notebook_count FROM Product GROUP BY Producing_country";
-//                stat = connection.createStatement();
-//                result = stat.executeQuery(command);
-//
-//                while (result.next()) {
-//                    String country = result.getString("Producing_country");
-//                    int notebookCount = result.getInt("notebook_count");
-//                    out.println("<tr><td>" + country + "</td><td>" + notebookCount + "</td></tr>");
-//                }
-//
-//                out.println("</table>");
-//
-//                out.println("<h1>" + "Назва фірми-виробника та кількість блокнотів кожної з них" + "</h1>");
-//
-//                out.println("<table>");
-//                out.println("<tr><th>Фірма-виробник</th><th>Кількість блокнотів</th></tr>");
-//
-//                command = "SELECT Company_name, COUNT(*) AS notebook_count FROM Product GROUP BY Company_name";
-//                stat = connection.createStatement();
-//                result = stat.executeQuery(command);
-//
-//                while (result.next()) {
-//                    String company = result.getString("Company_name");
-//                    int notebookCount = result.getInt("notebook_count");
-//                    out.println("<tr><td>" + company + "</td><td>" + notebookCount + "</td></tr>");
-//                }
-//
-//                out.println("</table>");
-//
-//                out.println("<h2>Країна з найбільшою кількістю блокнотів:</h2>");
-//                String maxNotebooksCountryQuery = "SELECT Producing_country, COUNT(*) AS notebook_count " +
-//                        "FROM Product " +
-//                        "GROUP BY Producing_country " +
-//                        "ORDER BY notebook_count DESC " +
-//                        "LIMIT 1";
-//
-//                stat = connection.createStatement();
-//                ResultSet maxNotebooksCountryResult = stat.executeQuery(maxNotebooksCountryQuery);
-//
-//                if (maxNotebooksCountryResult.next()) {
-//                    String maxCountry = maxNotebooksCountryResult.getString("Producing_country");
-//                    int maxCount = maxNotebooksCountryResult.getInt("notebook_count");
-//                    out.println("Країна: " + maxCountry + ", кількість блокнотів: " + maxCount);
-//                } else {
-//                    out.println("Дані відсутні.");
-//                }
-//                out.println("<br>");
-//
-//                out.println("<h2>Країна з найменшою кількістю блокнотів:</h2>");
-//                String minNotebooksCountryQuery = "SELECT Producing_country, COUNT(*) AS notebook_count " +
-//                        "FROM Product " +
-//                        "GROUP BY Producing_country " +
-//                        "ORDER BY notebook_count " +
-//                        "LIMIT 1";
-//                ResultSet minNotebooksCountryResult = stat.executeQuery(minNotebooksCountryQuery);
-//                if (minNotebooksCountryResult.next()) {
-//                    String minCountry = minNotebooksCountryResult.getString("Producing_country");
-//                    int minCount = minNotebooksCountryResult.getInt("notebook_count");
-//                    out.println("Країна: " + minCountry + ", кількість блокнотів: " + minCount);
-//                } else {
-//                    out.println("Дані відсутні.");
-//                }
-//                out.println("<br>");
-//
-//                out.println("<h2>Виробник з найбільшою кількістю блокнотів:</h2>");
-//                String maxNotebooksCompanyQuery = "SELECT Company_name, COUNT(*) AS notebook_count " +
-//                        "FROM Product " +
-//                        "GROUP BY Company_name " +
-//                        "ORDER BY notebook_count DESC " +
-//                        "LIMIT 1";
-//                ResultSet maxNotebooksCompanyResult = stat.executeQuery(maxNotebooksCompanyQuery);
-//                if (maxNotebooksCompanyResult.next()) {
-//                    String maxCompany = maxNotebooksCompanyResult.getString("Company_name");
-//                    int maxCount = maxNotebooksCompanyResult.getInt("notebook_count");
-//                    out.println("Виробник: " + maxCompany + ", кількість блокнотів: " + maxCount);
-//                } else {
-//                    out.println("Дані відсутні.");
-//                }
-//                out.println("<br>");
-//
-//                out.println("<h2>Виробник з найменшою кількістю блокнотів:</h2>");
-//                String minNotebooksCompanyQuery = "SELECT Company_name, COUNT(*) AS notebook_count " +
-//                        "FROM Product " +
-//                        "GROUP BY Company_name " +
-//                        "ORDER BY notebook_count " +
-//                        "LIMIT 1";
-//                ResultSet minNotebooksCompanyResult = stat.executeQuery(minNotebooksCompanyQuery);
-//                if (minNotebooksCompanyResult.next()) {
-//                    String minCompany = minNotebooksCompanyResult.getString("Company_name");
-//                    int minCount = minNotebooksCompanyResult.getInt("notebook_count");
-//                    out.println("Виробник: " + minCompany + ", кількість блокнотів: " + minCount);
-//                } else {
-//                    out.println("Дані відсутні.");
-//                }
-//                out.println("<br>");
-//
-//                out.println("<h2>Блокноти з твердою обкладинкою:</h2>");
-//                String hardcoverQuery = "SELECT * FROM Product WHERE Cover_type = 'hard'";
-//                ResultSet hardcoverResult = stat.executeQuery(hardcoverQuery);
-//                out.println("<ul>");
-//                while (hardcoverResult.next()) {
-//                    String name = hardcoverResult.getString("name");
-//                    out.println("<li>" + name + "</li>");
-//                }
-//                out.println("</ul>");
-//                out.println("<br>");
-//
-//                out.println("<h2>Блокноти з м'якою обкладинкою:</h2>");
-//                String softcoverQuery = "SELECT * FROM Product WHERE Cover_type = 'soft'";
-//                ResultSet softcoverResult = stat.executeQuery(softcoverQuery);
-//                out.println("<ul>");
-//                while (softcoverResult.next()) {
-//                    String name = softcoverResult.getString("name");
-//                    out.println("<li>" + name + "</li>");
-//                }
-//                out.println("</ul>");
+                out.println("<h1>" + "Інформація про продавців" + "</h1>");
 
-                out.println("<h1>Завдання 4.1. Показати всі блокноти конкретної країни</h1>");
-                String selectedCountry = request.getParameter("country");
-                out.println("<h2>Виберіть країну-виробника:</h2>");
-                out.println("<form action='' method='get'>");
-                out.println("<select name='country'>");
-                out.println("<option value='Україна'>Україна</option>");
-                out.println("<option value='Китай'>Китай</option>");
-                out.println("<option value='Англія'>Англія</option>");
-                out.println("<option value='США'>США</option>");
-                out.println("</select>");
-                out.println("<input type='submit' value='Вибрано'>");
+                out.println("<table>");
+                out.println("<tr> <th> id </th> <th>name_seller</th> <th>contact_seller</th> <th>email_seller</th> </tr> ");
+                while (result.next()) {
+                    int id = result.getInt("id");
+                    String name_seller = result.getString("name_seller");
+                    String contact_seller = result.getString("contact_seller");
+                    String email_seller = result.getString("email_seller");
+
+                    out.println("<tr> <td> " + id + "</td> <td> " + name_seller + " </td> <td>" + contact_seller + "</td> <td>" + email_seller + "</td> </tr> ");
+                }
+                out.println("</table>");
+
+                commandRead = "select * from Buyers";
+//                Statement stat = connection.createStatement();
+                result = stat.executeQuery(commandRead);
+
+                out.println("<h1>" + "Інформація про покупців" + "</h1>");
+
+                out.println("<table>");
+                out.println("<tr> <th> id </th> <th>name_buyer</th> <th>contact_buyer</th> <th>email_buyer</th> </tr> ");
+                while (result.next()) {
+                    int id = result.getInt("id");
+                    String name_buyer = result.getString("name_buyer");
+                    String contact_buyer = result.getString("contact_buyer");
+                    String email_buyer = result.getString("email_buyer");
+
+                    out.println("<tr> <td> " + id + "</td> <td> " + name_buyer + " </td> <td>" +contact_buyer + "</td> <td>" + email_buyer + "</td> </tr> ");
+                }
+                out.println("</table>");
+
+                commandRead = "select * from Products";
+//                Statement stat = connection.createStatement();
+                result = stat.executeQuery(commandRead);
+
+                out.println("<h1>" + "Інформація про товари" + "</h1>");
+
+                out.println("<table>");
+                out.println("<tr> <th> id </th> <th>name_product</th> <th>count_product</th> <th>price_product</th> </tr> ");
+                while (result.next()) {
+                    int id = result.getInt("id");
+                    String name_product = result.getString("name_product");
+                    String count_product = result.getString("count_product");
+                    String price_product= result.getString("price_product");
+
+                    out.println("<tr> <td> " + id + "</td> <td> " + name_product + " </td> <td>" + count_product+ "</td> <td>" + price_product + "</td> </tr> ");
+                }
+                out.println("</table>");
+
+
+                out.println("<h1>Завдання 3.4 Відображення інформації про угоди конкретного продавця</h1>");
+                out.println("<h1>Введіть ID покупця для отримання інформації про його угоди</h1>");
+
+                out.println("<form method='GET'>");
+                out.println("ID покупця: <input type='text' name='buyer_id'><br>");
+                out.println("<input type='submit' value='Вивести інформацію про вказного покупця'>");
                 out.println("</form>");
 
-                if (selectedCountry != null && !selectedCountry.isEmpty()) {
-                    try {
-                        String query = "SELECT * FROM Product WHERE Producing_country=?";
-                        PreparedStatement preparedStatement = connection.prepareStatement(query);
-                        preparedStatement.setString(1, selectedCountry);
-                        ResultSet resultSet = preparedStatement.executeQuery();
+                String buyerId = request.getParameter("buyer_id");
+                if (buyerId != null && !buyerId.isEmpty()) {
 
-                        // Виведення результатів
-                        out.println("<h2>Блокноти виробника з країни " + selectedCountry + ":</h2>");
-                        out.println("<ul>");
-                        while (resultSet.next()) {
-                            String notebookName = resultSet.getString("name");
-                            out.println("<li>" + notebookName + "</li>");
-                        }
-                        out.println("</ul>");
+                    String query = "SELECT Sales.id, Sellers.name_seller, Buyers.name_buyer, Products.name_product, Sales.price_sale, Sales.date_sale " +
+                            "FROM Sales " +
+                            "INNER JOIN Sellers ON Sales.seller_id = Sellers.id " +
+                            "INNER JOIN Buyers ON Sales.buyer_id = Buyers.id " +
+                            "INNER JOIN Products ON Sales.product_id = Products.id " +
+                            "WHERE Buyers.id = " + buyerId;
 
+                    Statement statement = connection.createStatement();
+                    ResultSet resultSet = statement.executeQuery(query);
 
-                    } catch (Exception e) {
-                        out.println("Помилка: " + e.getMessage());
-                    }
-                }
-                out.println("<h1>Завдання 4.3. Створити фільтр по кількості сторінок</h1>");
-                String pageCount = request.getParameter("pageCount");
-                out.println("<h1>Фільтр по кількості сторінок</h1>");
-                out.println("<h2>Введіть кількість сторінок:</h2>");
-                out.println("<form action='' method='get'>");
-                out.println("<input type='text' name='pageCount'>");
-                out.println("<input type='submit' value='Фільтрувати'>");
-                out.println("</form>");
+                    out.println("<h2>Інформація про угоди покупця з ID " + buyerId + "</h2>");
+                    out.println("<table>");
+                    out.println("<tr><th>Номер угоди</th><th>Ім'я продавця</th><th>Ім'я покупця</th><th>Назва товару</th><th>Ціна угоди</th><th>Дата угоди</th></tr>");
 
+                    while (resultSet.next()) {
+                        int id = resultSet.getInt("id");
+                        String name_seller = resultSet.getString("name_seller");
+                        String name_buyer = resultSet.getString("name_buyer");
+                        String name_product = resultSet.getString("name_product");
+                        double price_sale = resultSet.getDouble("price_sale");
+                        Date date_sale = resultSet.getDate("date_sale");
 
-                // Показати блокноти з кількістю сторінок нижче вказаної у формі
-                if (pageCount != null && !pageCount.isEmpty()) {
-                    try {
-                        int pages = Integer.parseInt(pageCount);
-
-                        String query = "SELECT * FROM Product WHERE Number_of_pages < ?";
-                        PreparedStatement preparedStatement = connection.prepareStatement(query);
-                        preparedStatement.setInt(1, pages);
-                        ResultSet resultSet = preparedStatement.executeQuery();
-
-                        // Виведення результатів
-                        out.println("<h2>Блокноти з кількістю сторінок менше " + pageCount + ":</h2>");
-                        out.println("<ul>");
-                        while (resultSet.next()) {
-                            String notebookName = resultSet.getString("name");
-                            out.println("<li>" + notebookName + "</li>");
-                        }
-                        out.println("</ul>");
-
-                    } catch (NumberFormatException e) {
-                        out.println("Помилка: Введіть коректну кількість сторінок.");
+                        out.println("<tr><td>" + id + "</td><td>" + name_seller + "</td><td>" + name_buyer + "</td><td>" + name_product + "</td><td>" + price_sale + "</td><td>" + date_sale + "</td></tr>");
                     }
 
+                    out.println("</table>");
                 }
 
-                out.println("<h1>Фільтр за зовнішнім виглядом</h1>");
-                out.println("<h2>Введіть бажаний зовнішній вигляд:</h2>");
-                out.println("<form action='' method='get'>");
-                out.println("<input type='text' name='appearance'>");
-                out.println("<input type='submit' value='Фільтрувати'>");
-                out.println("</form>");
 
-                String appearance = request.getParameter("appearance");
-                if (appearance != null && !appearance.isEmpty()) {
-                    try {
-                        String query = "SELECT * FROM Product WHERE Appearance=?";
-                        PreparedStatement preparedStatement = connection.prepareStatement(query);
-                        preparedStatement.setString(1, appearance);
-                        ResultSet resultSet = preparedStatement.executeQuery();
+                String query2 = "SELECT Sellers.id, Sellers.name_seller, SUM(Sales.price_sale) AS total_sales " +
+                        "FROM Sellers " +
+                        "JOIN Sales ON Sellers.id = Sales.seller_id " +
+                        "GROUP BY Sellers.id, Sellers.name_seller " +
+                        "ORDER BY total_sales DESC " +
+                        "LIMIT 1";
 
-                        out.println("<h2>Блокноти зі зовнішнім виглядом \"" + appearance + "\":</h2>");
-                        out.println("<ul>");
-                        while (resultSet.next()) {
-                            String notebookName = resultSet.getString("name");
-                            out.println("<li>" + notebookName + "</li>");
-                        }
-                        out.println("</ul>");
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query2);
 
-                    } catch (SQLException e) {
-                        out.println("Помилка: " + e.getMessage());
+                if (resultSet.next()) {
+                    int sellerId = resultSet.getInt("id");
+                    String sellerName = resultSet.getString("name_seller");
+                    double totalSales = resultSet.getDouble("total_sales");
+
+                    out.println("<h2>Завдання 4.1. Інформація про найбільш успішного продавця (максимальна сума продажів)</h2>");
+                    out.println("<p>ID продавця: " + sellerId + "</p>");
+                    out.println("<p>Ім'я продавця: " + sellerName + "</p>");
+                    out.println("<p>Загальна сума продажів: " + totalSales + "</p>");
+                } else {
+                    out.println("<p>Немає даних про продавців у базі даних.</p>");
+                }
+
+                String query3 = "SELECT Products.id, Products.name_product, SUM(Sales.count_product) AS total_units_sold " +
+                        "FROM Products " +
+                        "JOIN Sales ON Products.id = Sales.product_id " +
+                        "GROUP BY Products.id, Products.name_product " +
+                        "ORDER BY total_units_sold DESC " +
+                        "LIMIT 1";
+                try (Statement statement3 = connection.createStatement();
+                     ResultSet resultSet3 = statement3.executeQuery(query3)) {
+
+                    out.println("<h2>Завдання 4.4 Інформація про найпопулярніший товар</h2>");
+
+                    if (resultSet3.next()) {
+                        int productId = resultSet3.getInt("id");
+                        String productName = resultSet3.getString("name_product");
+                        int totalUnitsSold = resultSet3.getInt("total_units_sold");
+
+                        out.println("<p>ID товару: " + productId + "</p>");
+                        out.println("<p>Назва товару: " + productName + "</p>");
+                        out.println("<p>Загальна кількість проданих одиниць: " + totalUnitsSold + "</p>");
+                    } else {
+                        out.println("<p>Немає даних про товари у базі даних.</p>");
                     }
+
+
+
+
+                    out.println("<h1>Вибір діапазону дат</h1>");
+                    out.println("<form method='GET' action='/hello-servlet'>");
+                    out.println("Початкова дата: <input type='date' name='start_date'><br>");
+                    out.println("Кінцева дата: <input type='date' name='end_date'><br>");
+                    out.println("<input type='submit' value='Відобразити інформацію'>");
+                    out.println("</form>");
+
+                    String startDate = request.getParameter("start_date");
+                    String endDate = request.getParameter("end_date");
+
+                    if (startDate != null && endDate != null) {
+                        try {
+                            String query = "SELECT * FROM Sales WHERE date_sale BETWEEN ? AND ?";
+                            PreparedStatement preparedStatement = connection.prepareStatement(query);
+                            preparedStatement.setString(1, startDate);
+                            preparedStatement.setString(2, endDate);
+                            resultSet = preparedStatement.executeQuery();
+
+                            out.println("<h2>Інформація про угоди за період з " + startDate + " до " + endDate + "</h2>");
+                            out.println("<table>");
+                            out.println("<tr><th>ID</th><th>ID продавця</th><th>ID покупця</th><th>ID товару</th><th>Ціна угоди</th><th>Дата угоди</th></tr>");
+
+                            while (resultSet.next()) {
+                                int id = resultSet.getInt("id");
+                                int sellerId = resultSet.getInt("seller_id");
+                                int buyerId2 = resultSet.getInt("buyer_id");
+                                int productId = resultSet.getInt("product_id");
+                                double priceSale = resultSet.getDouble("price_sale");
+                                String dateSale = resultSet.getString("date_sale");
+
+                                out.println("<tr><td>" + id + "</td><td>" + sellerId + "</td><td>" + buyerId2 + "</td><td>" + productId + "</td><td>" + priceSale + "</td><td>" + dateSale + "</td></tr>");
+                            }
+
+                            out.println("</table>");
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+
+
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
                 }
+
+
 
                 out.println("</body></html>");
-
-
             }
         } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
         }
+
     }
 
     public void destroy() {
